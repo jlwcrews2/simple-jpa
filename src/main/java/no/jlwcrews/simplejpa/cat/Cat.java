@@ -13,14 +13,19 @@ import no.jlwcrews.simplejpa.owner.Owner;
 public class Cat {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "cat_gen")
+    @SequenceGenerator(name = "cat_gen", sequenceName = "cat_seq", allocationSize = 1)
+    @Column(name = "cat_id")
     private long id;
+    @Column(name = "cat_name")
     private String name;
+    @Column(name = "cat_breed")
     private String breed;
+    @Column(name = "cat_age")
     private int age;
 
     @ManyToOne
-    @JoinColumn(name = "owner_id")
+    @JoinColumn(name = "cat_owner_id")
     @JsonIgnoreProperties("cats")
     private Owner owner;
 

@@ -25,7 +25,7 @@ public class InitialData implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         for (long i = 0; i < 25; i++) {
             Owner owner = ownerService.saveOwner(
                new Owner(faker.name().lastName(),

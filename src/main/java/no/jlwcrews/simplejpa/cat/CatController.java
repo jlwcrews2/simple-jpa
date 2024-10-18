@@ -1,7 +1,6 @@
 package no.jlwcrews.simplejpa.cat;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,22 +19,27 @@ public class CatController {
 
     @GetMapping
     public ResponseEntity<List<Cat>> getCats() {
-        return new ResponseEntity<>(catService.getCats(), HttpStatus.OK);
+        return ResponseEntity.ok(catService.getCats());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Cat> getCatById(@PathVariable Long id) {
-        return new ResponseEntity<>(catService.getCatById(id), HttpStatus.OK);
+        return ResponseEntity.ok(catService.getCatById(id));
+    }
+
+    @GetMapping("/age/{age}")
+    public ResponseEntity<List<Cat>> getCatsBelowAge(@PathVariable int age) {
+        return ResponseEntity.ok(catService.getCatsBelowAge(age));
     }
 
     @PostMapping
     public ResponseEntity<Cat> createCat(@RequestBody Cat cat) {
-        return new ResponseEntity<>(catService.addCat(cat), HttpStatus.CREATED);
+        return ResponseEntity.ok(catService.addCat(cat));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCatById(@PathVariable Long id) {
         catService.deleteCat(id);
-        return new ResponseEntity<>("Your cat is deleted", HttpStatus.OK);
+        return ResponseEntity.ok("Your cat is deleted");
     }
 }

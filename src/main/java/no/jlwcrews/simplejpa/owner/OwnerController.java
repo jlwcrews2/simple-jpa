@@ -1,7 +1,6 @@
 package no.jlwcrews.simplejpa.owner;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,22 +19,22 @@ public class OwnerController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Owner> getOwnerById(@PathVariable long id) {
-        return new ResponseEntity<>(ownerService.getOwnerById(id), HttpStatus.OK);
+        return ResponseEntity.ok(ownerService.getOwnerById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<Owner>> getOwners(){
-        return new ResponseEntity<>(ownerService.getOwners(), HttpStatus.OK);
+    public ResponseEntity<List<Owner>> getOwners() {
+        return ResponseEntity.ok(ownerService.getOwners());
     }
 
     @PostMapping
     public ResponseEntity<Owner> createOwner(@RequestBody Owner owner) {
-        return new ResponseEntity<>(ownerService.saveOwner(owner), HttpStatus.CREATED);
+        return ResponseEntity.ok(ownerService.saveOwner(owner));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteOwnerById(@PathVariable long id) {
         ownerService.deleteOwnerById(id);
-        return new ResponseEntity<>("Your shit is gone", HttpStatus.OK);
+        return ResponseEntity.ok("Your shit is gone");
     }
 }

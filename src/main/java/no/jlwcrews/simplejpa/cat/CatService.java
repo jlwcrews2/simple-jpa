@@ -23,6 +23,10 @@ public class CatService {
         return catRepo.findAll();
     }
 
+    public List<Cat> getCatsBelowAge(int age) {
+        return catRepo.findCatsByAgeBefore(age);
+    }
+
     public Cat getCatById(long id) {
         return catRepo.findById(id).orElse(null);
     }
